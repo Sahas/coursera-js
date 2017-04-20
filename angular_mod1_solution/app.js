@@ -18,7 +18,7 @@
 
       if($scope.items === ''){
         $scope.message= 'Please enter data first';
-        $scope.messageColor = 'text-warning';
+        $scope.messageColor = 'text-danger';
       }
       else{
         var itemList = $scope.items.split(',');
