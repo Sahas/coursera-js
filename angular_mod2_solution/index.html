@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+<body ng-app= "ShoppingListApp">
+  <div class="container">
+  <h1>Shopping List Check Off</h1>
+
+  <div class="row">
+
+    <!-- To Buy List -->
+    <div class="col-md-6" ng-controller="ToBuyController as ctr1">
+     <h2>To Buy:</h2>
+     <ul>
+       <li ng-repeat ="item in ctr1.toBuyList">Buy {{item.quantity}} {{item.name}}
+         <button ng-click = "ctr1.removeItemFromList($index)" class="btn btn-default">
+           <span class="glyphicon glyphicon-ok"></span> Bought
+         </button></li>
+     </ul>
+     <div ng-if="ctr1.isBuyListEmpty()" class="emptyMessage">Everything is bought!</div>
+    </div>
+
+    <!-- Already Bought List -->
+    <div class="col-md-6" ng-controller="BoughtController as ctr2">
+     <h2>Already Bought:</h2>
+     <ul>
+       <li ng-repeat ="item in ctr2.boughtList">Bought {{item.quantity}} {{item.name}}</li>
+     </ul>
+     <div ng-if= "ctr2.isBoughtListEmpty()" class="emptyMessage">Nothing bought yet.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
