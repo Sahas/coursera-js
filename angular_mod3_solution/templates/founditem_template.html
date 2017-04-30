@@ -1,0 +1,14 @@
+<div class="clear-left">
+  <table ng-if = "ctr2.found.length!=0">
+    <tr ng-repeat="item in ctr2.found">
+      <td>{{item.name}}</td>
+      <td>{{item.short_name}}</td>
+      <td>{{item.description}}</td>
+      <td>
+        <button ng-click="ctr2.onRemove({index:$index})">Don't want this one</button>
+      </td>
+  </table>
+  <div ng-transclude>
+
+  </div>
+</div>
