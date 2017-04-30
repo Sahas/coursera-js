@@ -11,6 +11,7 @@
 SearchController.$inject = ['MenuSearchService']
 function SearchController(searchProvider){
   var ctr1=this;
+  this.msg = "";
 
   ctr1.searchItems = function(searchQuery){
     if(searchQuery){
@@ -23,6 +24,7 @@ function SearchController(searchProvider){
     }
     else{
       ctr1.foundItems = [];
+      this.msg="Nothing found..";
     }
   }
 
