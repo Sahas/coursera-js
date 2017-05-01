@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module("NarrowItDownApp", [])
-.controller("SearchController", SearchController)
+.controller("NarrowItDownController", NarrowItDownController)
 .controller("FoundItemsController", FoundItemsController)
 .service("MenuSearchService", MenuSearchService)
 .directive('foundItems', FoundItemsDirective)
@@ -13,7 +13,7 @@
 
 
 SearchController.$inject = ['MenuSearchService','$rootScope']
-function SearchController(searchProvider,$rootScope){
+function NarrowItDownController(searchProvider,$rootScope){
   var ctr1=this;
   ctr1.msg = "";
 
