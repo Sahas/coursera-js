@@ -34,6 +34,11 @@ input[type="text"] {
 .clear-left{
   clear:left;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+ }
+
 @-webkit-keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
