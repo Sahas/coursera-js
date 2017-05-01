@@ -19,7 +19,7 @@ function SearchController(searchProvider){
         promise.then(function(response){
           //console.log(response);
           ctr1.foundItems = response;
-          console.log(ctr1.foundItems);
+          //console.log(ctr1.foundItems);
         });
     }
     else{
@@ -30,6 +30,9 @@ function SearchController(searchProvider){
 
   ctr1.removeItem = function(index){
     ctr1.foundItems.splice(index,1);
+    if(ctr1.foundItems.length ==0){
+      this.msg="Nothing found..";
+    }
   }
 }
 
@@ -84,7 +87,8 @@ function FoundItemsDirective(){
     templateUrl: "templates/founditem_template.html",
     scope :{
       'found':'<',
-      'onRemove': '&'
+      'onRemove': '&',
+      'message' : '<'
     },
     controller: FoundItemsController,
     bindToController: true,
