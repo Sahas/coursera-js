@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Narrow Down Your Menu Choice</title>
@@ -19,9 +19,10 @@
 
     <!-- found-items should be implemented as a component -->
     <found-items found="ctr1.foundItems" on-remove="ctr1.removeItem(index)">
-      <span ng-cloak ng-show="ctr1.foundItems.length==0" class="text-danger"> {{ctr1.msg}}</span>
+      <span ng-cloak class="text-danger"> {{ctr1.msg}}</span>
     </found-items>
   </div>
+  <loading-spinner></loading-spinner>
   <script src="src/angular.js"></script>
   <script src="src/app.js"></script>
 </body>

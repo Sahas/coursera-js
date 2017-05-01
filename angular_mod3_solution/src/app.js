@@ -5,26 +5,38 @@
 .controller("SearchController", SearchController)
 .controller("FoundItemsController", FoundItemsController)
 .service("MenuSearchService", MenuSearchService)
-.directive('foundItems', FoundItemsDirective);
+.directive('foundItems', FoundItemsDirective)
+.component("loadingSpinner", {
+  templateUrl:'itemsloaderindicator_template.html',
+  controller: SpinnerController
+});
 
 
-SearchController.$inject = ['MenuSearchService']
-function SearchController(searchProvider){
+SearchController.$inject = ['MenuSearchService','$rootScope']
+function SearchController(searchProvider,$rootScope){
   var ctr1=this;
-  this.msg = "";
+  ctr1.msg = "";
 
   ctr1.searchItems = function(searchQuery){
     if(searchQuery){
+        ctr1.foundItems = [];
+        ctr1.msg = "";
+        $rootScope.$broadcast('menu_items:processing',{on:true});
         var promise = searchProvider.getFoundItems(searchQuery);
         promise.then(function(response){
           //console.log(response);
           ctr1.foundItems = response;
           //console.log(ctr1.foundItems);
+          $rootScope.$broadcast('menu_items:processing',{on:false});
+          if(ctr1.foundItems.length==0){
+            ctr1.msg="Nothing found..";
+          }
         });
+
     }
     else{
       ctr1.foundItems = [];
-      this.msg="Nothing found..";
+      ctr1.msg="Nothing found..";
     }
   }
 
@@ -40,8 +52,8 @@ function FoundItemsController(){
 
 }
 
-MenuSearchService.$inject = ['$http']
-function MenuSearchService($http){
+MenuSearchService.$inject = ['$http','$rootScope']
+function MenuSearchService($http,$rootScope){
   var foundItems = [];
   var searchQuery = "";
 
@@ -81,6 +93,10 @@ function MenuSearchService($http){
 
 }
 
+var loadingSpinnerComponent = {
+  templateUrl:'loader/itemsloaderindicator.template.html',
+  controller: SpinnerController
+};
 
 function FoundItemsDirective(){
   var ddo = {
@@ -97,4 +113,24 @@ function FoundItemsDirective(){
   };
   return ddo;
 }
+
+SpinnerController.$inject=['$rootScope']
+function SpinnerController($rootScope){
+  var $ctrl=this;
+  $ctrl.showLoader = false;
+
+  var cancelListener = $rootScope.$on('menu_items:processing', function(event,data){
+    if(data.on){
+      $ctrl.showLoader = true;
+    }
+    else{
+      $ctrl.showLoader = false;
+    }
+  });
+
+  $ctrl.$onDestroy = function(){
+    cancelListener();
+  };
+}
+
 })();
