@@ -7,7 +7,7 @@
 .service("MenuSearchService", MenuSearchService)
 .directive('foundItems', FoundItemsDirective)
 .component("loadingSpinner", {
-  templateUrl:'itemsloaderindicator_template.html',
+  templateUrl:'loader/itemsloaderindicator_template.html',
   controller: SpinnerController
 });
 
