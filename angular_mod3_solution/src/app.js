@@ -12,7 +12,7 @@
 });
 
 
-SearchController.$inject = ['MenuSearchService','$rootScope']
+NarrowItDownController.$inject = ['MenuSearchService','$rootScope']
 function NarrowItDownController(searchProvider,$rootScope){
   var ctr1=this;
   ctr1.msg = "";
